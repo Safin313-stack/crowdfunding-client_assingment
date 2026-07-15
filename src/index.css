@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #0F0E17;
+  color: #F1F1F4;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+/* cursor is hidden only after CustomCursor mounts successfully (body.cursor-ready) */
+body.cursor-ready * {
+  cursor: none;
+}
+@media (max-width: 768px) {
+  body.cursor-ready * { cursor: auto; }
+  #custom-cursor, #cursor-ring { display: none; }
+}
+
+/* ---------- custom cursor ---------- */
+#custom-cursor {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background: #6C5CE7;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.08s ease-out;
+}
+#cursor-ring {
+  position: fixed;
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid rgba(108, 92, 231, 0.6);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.15s ease-out, width 0.2s, height 0.2s, border-color 0.2s;
+}
+.cursor-grow #cursor-ring {
+  width: 56px;
+  height: 56px;
+  border-color: rgba(0, 210, 160, 0.8);
+  background: rgba(0, 210, 160, 0.08);
+}
+
+/* ---------- glass card ---------- */
+.glass {
+  background: rgba(23, 22, 34, 0.6);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ---------- scrollbar ---------- */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #0F0E17; }
+::-webkit-scrollbar-thumb { background: #6C5CE7; border-radius: 10px; }
+
+/* ---------- hover underline link ---------- */
+.link-underline {
+  position: relative;
+}
+.link-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(90deg, #6C5CE7, #00D2A0);
+  transition: width 0.3s ease;
+}
+.link-underline:hover::after { width: 100%; }
+
+/* ---------- card hover tilt ---------- */
+.tilt-card {
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+.tilt-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(108, 92, 231, 0.25);
+}
+
+/* ---------- button glow ---------- */
+.btn-primary {
+  background: linear-gradient(90deg, #6C5CE7, #8b7cf6);
+  transition: all 0.3s ease;
+}
+.btn-primary:hover {
+  box-shadow: 0 0 25px rgba(108, 92, 231, 0.6);
+  transform: translateY(-2px);
+}
